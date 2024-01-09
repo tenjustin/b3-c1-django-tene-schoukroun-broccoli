@@ -1,0 +1,12 @@
+{% if password_list %}
+    {% for pass in password_list %}
+    <div>
+        <ul>
+            <li>{{ pass.nom}}
+            <li>{{ pass.url }}</li>
+            <li>{{ pass.identifiant }}</li>
+            <li>{{ pass.mot_de_passe }}</li>
+        </ul>
+    </div>
+    {% endfor %}
+{% endif %}
