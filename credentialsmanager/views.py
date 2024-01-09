@@ -1,7 +1,17 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Site
+from .forms import SiteForm
 
-# Create your views here.
+def liste_sites(request):
+    sites = Site.objects.all()
+    return render(request, 'liste_sites.html', {'sites': sites})
 
-def index(request):
-    return HttpResponse("Hello World !")
+def ajout_site(request):
+    if request.method == 'POST':
+        form = SiteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_sites')
+    else:
+        form = SiteForm()
+    return render(request, 'ajout_site.html', {'form': form})
