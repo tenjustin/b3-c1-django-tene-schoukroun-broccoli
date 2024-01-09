@@ -1,6 +1,8 @@
 from typing import Any
+from typing import Any
 from django.db import models
 from django.urls import reverse
+
 
 class Site(models.Model):
     id = models.Index
@@ -21,3 +23,10 @@ class Site(models.Model):
     
     def get_absolute_url(self):
         return reverse('', args=[str(self.id)])
+    
+class CustomUser(models.Model):
+    identifiant = models.CharField(max_length=100)
+    mot_de_passe = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.username
