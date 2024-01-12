@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("/ajout_site.html", views.ajout_site, name="ajout_site"),
+    path("/ajout_site", views.ajout_site_action, name="ajout_site"),
 ]
