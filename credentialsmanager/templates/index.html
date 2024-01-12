@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <button class="btn btn-primary" type="button">Ajouter un site</button>
     <table class="table">
         <thead>
           <tr>
@@ -19,6 +20,7 @@
                 <td>{{ pass.url }}</td>
                 <td>{{ pass.identifiant }}</td>
                 <td>{{ pass.mot_de_passe }}</td>
+                <td><a href="{% url 'supprimer_enregistrement' pk=pass.id %}">Supprimer</a></td>
             </tr>
             {% endfor %}
             {% endif %}
