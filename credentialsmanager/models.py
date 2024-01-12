@@ -1,13 +1,16 @@
 from typing import Any
 from django.db import models
+from django.urls import reverse
 
 class Site(models.Model):
-    nom = models.CharField
+    id = models.Index
+    nom = models.CharField(max_length=255,default="")
     url = models.URLField()
-    identifiant = models.CharField
-    mot_de_passe = models.CharField
+    identifiant = models.CharField(max_length=255,default="")
+    mot_de_passe = models.CharField(max_length=255,default="")
     
-    def __init__(self, nom, url, identifiant, mot_de_passe):
+    def __init__(self, id, nom, url, identifiant, mot_de_passe):
+        self.id = id
         self.nom = nom
         self.url = url
         self.identifiant = identifiant
@@ -15,3 +18,6 @@ class Site(models.Model):
 
     def __str__(self):
         return self.nom
+    
+    def get_absolute_url(self):
+        return reverse('', args=[str(self.id)])
