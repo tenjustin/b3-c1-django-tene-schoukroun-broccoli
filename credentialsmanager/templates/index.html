@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <button class="btn btn-primary" type="button">Ajouter un site</button>
+    <a class="btn btn-primary" type="button" href="/passmanager/ajout_site">Ajouter un site</a>
     <table class="table">
         <thead>
           <tr>
@@ -13,8 +13,8 @@
           </tr>
         </thead>
         <tbody>
-            {% if password_list %}          
-            {% for pass in password_list %}
+            {% if sites %}          
+            {% for pass in sites %}
             <tr>
                 <td scope="row">{{ pass.nom }}</td>
                 <td>{{ pass.url }}</td>

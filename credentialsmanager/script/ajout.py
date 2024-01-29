@@ -1,4 +1,4 @@
-from models import Site
+from ..models import Site
 
 def ajout_site(nom, url, identifiant, mot_de_passe):
     try:

@@ -11,12 +11,12 @@ class Site(models.Model):
     identifiant = models.CharField(max_length=255,default="")
     mot_de_passe = models.CharField(max_length=255,default="")
     
-    def __init__(self, id, nom, url, identifiant, mot_de_passe):
-        self.id = id
-        self.nom = nom
-        self.url = url
-        self.identifiant = identifiant
-        self.mot_de_passe = mot_de_passe
+    # def __init__(self, id, nom, url, identifiant, mot_de_passe):
+    #     self.id = id
+    #     self.nom = nom
+    #     self.url = url
+    #     self.identifiant = identifiant
+    #     self.mot_de_passe = mot_de_passe
 
     def __str__(self):
         return self.nom
