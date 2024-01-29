@@ -1,8 +1,13 @@
+from django.shortcuts import render, redirect
+from .models import Site
+from .forms import SiteForm
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
-from credentialsmanager.models import Site
-from credentialsmanager.scripts import delete
+from .models import Site
+from django.shortcuts import render, redirect
+from .forms import SiteForm
+from credentialsmanager.script import ajout
 
 # Create your views here.
 
@@ -15,11 +20,33 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
-def delete_action(request):
+# views.py
+
+def liste_sites(request):
+    sites = Site.objects.all()
+    return render(request, 'liste_sites.html', {'sites': sites})
+
+def ajout_site_action(request):
     if request.method == 'POST':
-        delete.run_delete()  # Supposons que run_delete() est une fonction dans delete.py
-        # Rediriger ou afficher un message de succès
-        return render(request, 'index.html')
+        nom = request.POST.get('nom')
+        url = request.POST.get('url')
+        identifiant = request.POST.get('identifiant')
+        mot_de_passe = request.POST.get('mot_de_passe')
+
+        success, message = ajout.ajout_site(nom, url, identifiant, mot_de_passe)
+        if success:
+            return redirect('success_url')  # Rediriger vers une URL de succès
+        else:
+            return render(request, 'error.html', {'message': message})
     else:
-        # Gérer les autres méthodes (GET, etc.)
-        return render(request, 'error.html')
+        form = SiteForm()
+    return render(request, 'ajout_site.html', {'form': form})
+
+def index(request):
+    password_list = []
+    password_list.append(Site(1, "example", "example.com", "Justin", "Password123"))
+    
+def supprimer_enregistrement(request, pk):
+    objet_a_supprimer = get_object_or_404(Site, pk=pk)
+    objet_a_supprimer.delete()
+    return redirect('index')
