@@ -9,6 +9,9 @@ from django.shortcuts import render, redirect
 from .forms import SiteForm
 from credentialsmanager.script import ajout
 
+def detail_site(request, pk):
+    site = get_object_or_404(Site, pk=pk)
+    return render(request, 'details_site.html', {'site': site})
 
 def liste_sites(request):
     query = request.GET.get('q')
@@ -28,7 +31,7 @@ def ajout_site_action(request):
         mot_de_passe = request.POST.get('mot_de_passe')
         success, message = ajout.ajout_site(nom, url, identifiant, mot_de_passe)
         if success:
-            return redirect('/passmanager/')  # Rediriger vers une URL de succès
+            return redirect('/passmanager/')  
         else:
             return render(request, 'error.html', {'message': message})
     else:
@@ -41,7 +44,7 @@ def supprimer_enregistrement(request, pk):
     return redirect('liste_sites')
 
 def generer_mot_de_passe():
-    length = 12  # Vous pouvez ajuster la longueur du mot de passe
+    length = 12  
     caracteres = string.ascii_letters + string.digits + string.punctuation
     return ''.join(random.choice(caracteres) for i in range(length))
 
@@ -52,7 +55,7 @@ def modifier_site(request, pk):
         form = SiteForm(request.POST, instance=site)
         if form.is_valid():
             form.save()
-            return redirect('liste_sites')  # Rediriger vers la liste des sites après modification
+            return redirect('liste_sites')  
     else:
         form = SiteForm(instance=site)
 

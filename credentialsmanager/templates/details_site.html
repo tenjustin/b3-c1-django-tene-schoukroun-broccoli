@@ -1,0 +1,15 @@
+<!-- templates/detail_site.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ site.nom }}</h2>
+            <p class="card-text"><strong>URL:</strong> {{ site.url }}</p>
+            <p class="card-text"><strong>Identifiant:</strong> {{ site.identifiant }}</p>
+            <p class="card-text"><strong>Mot de Passe:</strong> {{ site.mot_de_passe }}</p>
+        </div>
+    </div>
+
+    <a href="{% url 'liste_sites' %}" class="btn btn-primary mt-3">Retour à la liste</a>
+{% endblock %}

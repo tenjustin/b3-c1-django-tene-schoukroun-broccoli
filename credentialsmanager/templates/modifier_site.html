@@ -4,95 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier le site</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            max-width: 100%;
-            box-sizing: border-box;
-            position: relative; /* Ajout de cette propriété pour positionner le bouton par rapport à son conteneur */
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="url"] {
-            width: calc(100% - 16px); /* Ajustement de la largeur pour inclure la marge interne */
-            padding: 8px;
-            margin-bottom: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #000000;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: calc(100% - 16px); /* Ajustement de la largeur pour inclure la marge interne */
-        }
-
-        button:hover {
-            background-color: #2f2f2f;
-        }
-
-        /* Ajout de styles pour positionner le bouton */
-        button#generer_mot_de_passe {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin-top: 8px; /* Ajustement de la marge au-dessus du bouton */
-            margin-right: 8px; /* Ajustement de la marge à droite du bouton */
-        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <!-- templates/modifier_site.html -->
-    <h2>Modifier le site</h2>
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Modifier</button>
-        <button type="button" id="generer_mot_de_passe">Générer Mot de Passe Aléatoire</button>
-    </form>
+    <div class="container mt-5">
+        <h2 class="text-center">Modifier le site</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary btn-block">Modifier</button>
+            <button type="button" id="generer_mot_de_passe" class="btn btn-secondary btn-block mt-3">Générer Mot de Passe Aléatoire</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
         document.getElementById('generer_mot_de_passe').addEventListener('click', function() {
-            // Appeler une fonction JavaScript pour générer un mot de passe aléatoire
             var motDePasseInput = document.getElementById('id_mot_de_passe');
             motDePasseInput.value = genererMotDePasse();
         });
 
         function genererMotDePasse() {
-            // Code JavaScript pour générer un mot de passe aléatoire
-            // Vous pouvez personnaliser cette fonction selon vos besoins
             var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
             var longueur = 12;
             var motDePasse = '';

@@ -16,28 +16,27 @@
         <p class="mt-2">Résultats de la recherche pour "{{ query }}":</p>
     {% endif %}
 
+    
+    {% if query %}
+        <p class="mt-2">Résultats de la recherche pour "{{ query }}":</p>
+    {% endif %}
+
     <table class="table mt-3">
         <thead>
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">URL</th>
-            <th scope="col">Identifiant</th>
-            <th scope="col">Mot de Passe</th>
-            <th scope="col">Edition</th>
-          </tr>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Edition</th>
+            </tr>
         </thead>
         <tbody>
-            {% if sites %}          
-            {% for pass in sites %}
-            <tr>
-                <td>{{ pass.nom }}</td>
-                <td>{{ pass.url }}</td>
-                <td>{{ pass.identifiant }}</td>
-                <td>{{ pass.mot_de_passe }}</td>
-                <td><a href="{% url 'modification_site' pk=pass.id %}" class="btn btn-warning btn-sm">Modifier</a></td>
-                <td><a href="{% url 'supprimer_enregistrement' pk=pass.id %}" class="btn btn-danger btn-sm">Supprimer</a></td>
-            </tr>
-            {% endfor %}
+            {% if sites %}
+                {% for pass in sites %}
+                    <tr>
+                        <td><a href="{% url 'detail_site' pk=pass.id %}">{{ pass.nom }}</a></td>
+                        <td><a href="{% url 'modification_site' pk=pass.id %}" class="btn btn-warning btn-sm">Modifier</a></td>
+                        <td><a href="{% url 'supprimer_enregistrement' pk=pass.id %}" class="btn btn-danger btn-sm">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
             {% endif %}
         </tbody>
     </table>
