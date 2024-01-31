@@ -42,7 +42,7 @@ def import_csv(request):
             obj, created = Site.objects.get_or_create(nom=row[0], url=row[1], identifiant=row[2], mot_de_passe=row[3])  # ajustez en fonction de votre modèle
             obj.save()
 
-        return HttpResponse('Importation réussie!')
+        return redirect(liste_sites)
 
     return redirect(liste_sites)
 
