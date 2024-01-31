@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import Site  
+from .models import CustomUser, Site  
 
 class SiteForm(forms.ModelForm):
     class Meta:

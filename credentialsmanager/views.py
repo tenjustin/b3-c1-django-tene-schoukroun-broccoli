@@ -1,5 +1,6 @@
+import csv
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Site
+from .models import CustomUser, Site
 from .forms import SiteForm
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -8,6 +9,11 @@ from .models import Site
 from django.shortcuts import render, redirect
 from .forms import SiteForm
 from credentialsmanager.script import ajout
+from .forms import LoginForm
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
+from .forms import LoginForm
 
 def detail_site(request, pk):
     site = get_object_or_404(Site, pk=pk)
@@ -22,6 +28,45 @@ def liste_sites(request):
         sites = Site.objects.all()
 
     return render(request, 'index.html', {'sites': sites, 'query': query})
+
+def page_import(request):
+    return render(request, 'page_import.html')
+
+def import_csv(request):
+    if request.method == 'POST' and 'file' in request.FILES:
+        csv_file = request.FILES['file']
+        decoded_file = csv_file.read().decode('utf-8').splitlines()
+
+        # Utiliser le module CSV pour lire les données du fichier
+        reader = csv.reader(decoded_file)
+        
+        first_row = True         
+         
+        for row in reader:
+            if first_row:
+                first_row = False
+                continue
+            # Traiter chaque ligne et enregistrer les données dans le modèle Django
+            obj, created = Site.objects.get_or_create(nom=row[0], url=row[1], identifiant=row[2], mot_de_passe=row[3])  # ajustez en fonction de votre modèle
+            obj.save()
+
+        return redirect(liste_sites)
+
+    return redirect(liste_sites)
+
+def exporter_identifiants_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="identifiants.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Nom du site','URL', 'Identifiant', 'Mot de passe'])  # En-têtes CSV
+
+    identifiant = Site.objects.all()  # Récupérer les mots de passe depuis le modèle Django
+
+    for identifiant in identifiant:
+        writer.writerow([identifiant.nom, identifiant.url,identifiant.identifiant, identifiant.mot_de_passe])
+
+    return response
 
 def ajout_site_action(request):
     if request.method == 'POST':
