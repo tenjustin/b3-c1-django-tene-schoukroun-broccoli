@@ -9,12 +9,16 @@ from django.shortcuts import render, redirect
 from .forms import SiteForm
 from credentialsmanager.script import ajout
 
-# Create your views here.
-# views.py
 
 def liste_sites(request):
-    sites = Site.objects.all()
-    return render(request, 'index.html', {'sites': sites})
+    query = request.GET.get('q')
+
+    if query:
+        sites = Site.objects.filter(nom__icontains=query)
+    else:
+        sites = Site.objects.all()
+
+    return render(request, 'index.html', {'sites': sites, 'query': query})
 
 def ajout_site_action(request):
     if request.method == 'POST':
@@ -35,3 +39,21 @@ def supprimer_enregistrement(request, pk):
     objet_a_supprimer = get_object_or_404(Site, pk=pk)
     objet_a_supprimer.delete()
     return redirect('liste_sites')
+
+def generer_mot_de_passe():
+    length = 12  # Vous pouvez ajuster la longueur du mot de passe
+    caracteres = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(random.choice(caracteres) for i in range(length))
+
+def modifier_site(request, pk):
+    site = get_object_or_404(Site, pk=pk)
+
+    if request.method == 'POST':
+        form = SiteForm(request.POST, instance=site)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_sites')  # Rediriger vers la liste des sites après modification
+    else:
+        form = SiteForm(instance=site)
+
+    return render(request, 'modifier_site.html', {'form': form})
