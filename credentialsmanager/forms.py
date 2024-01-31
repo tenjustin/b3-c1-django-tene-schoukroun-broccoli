@@ -12,3 +12,4 @@ class SiteForm(forms.ModelForm):
             'identifiant': forms.TextInput(attrs={'class': 'form-control'}),
             'mot_de_passe': forms.PasswordInput(attrs={'class': 'form-control'}),
         }
+        

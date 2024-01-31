@@ -10,13 +10,35 @@
 <body>
     <!-- templates/modifier_site.html -->
     <div class="container mt-5">
-        <h2 class="text-center">Modifier le site</h2>
         <form method="post" action="">
             {% csrf_token %}
-            {{ form.as_p }}
+            <h2 class="text-center mb-4">Modifier le site</h2>
+            
+            <!-- Utilisez les classes Bootstrap pour styliser le formulaire -->
+            <div class="form-group">
+                <label for="{{ form.nom.id_for_label }}">Nom</label>
+                {{ form.nom }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.url.id_for_label }}">URL</label>
+                {{ form.url }}
+            </div>
 
-            <!-- Utilisez les classes Bootstrap pour styliser le bouton -->
-            <button type="submit" class="btn btn-primary btn-block">Modifier</button>
+            <div class="form-group">
+                <label for="{{ form.identifiant.id_for_label }}">Identifiant</label>
+                {{ form.identifiant }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.mot_de_passe.id_for_label }}">Mot de Passe</label>
+                {{ form.mot_de_passe }}
+            </div>
+
+            <!-- Utilisez les classes Bootstrap pour styliser le bouton "Modifier" -->
+            <button type="submit" class="btn btn-dark btn-block">Modifier</button>
+            
+            <!-- Utilisez les classes Bootstrap pour styliser le bouton "Générer Mot de Passe Aléatoire" -->
             <button type="button" id="generer_mot_de_passe" class="btn btn-secondary btn-block mt-3">Générer Mot de Passe Aléatoire</button>
         </form>
     </div>

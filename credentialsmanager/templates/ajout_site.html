@@ -1,75 +1,46 @@
-<!-- ajout_site.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un nouveau site</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="url"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #000000;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #2f2f2f;
-        }
-    </style>
+    <!-- Ajoutez le lien vers Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <form method="post" action="{% url 'ajout_site' %}">
-        {% csrf_token %}
-        <h2>Ajouter un nouveau site</h2>
-        {{ form.as_p }}
-        <button type="submit">Ajouter</button>
-    </form>
+    <div class="container mt-5">
+        <form method="post" action="{% url 'ajout_site' %}" class="bg-white p-4 rounded shadow-sm">
+            {% csrf_token %}
+            <h2 class="text-center mb-4">Ajouter un nouveau site</h2>
+            
+            <!-- Utilisez les classes Bootstrap pour styliser le formulaire -->
+            <div class="form-group">
+                <label for="{{ form.nom.id_for_label }}">Nom</label>
+                {{ form.nom }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.url.id_for_label }}">URL</label>
+                {{ form.url }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.identifiant.id_for_label }}">Identifiant</label>
+                {{ form.identifiant }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.mot_de_passe.id_for_label }}">Mot de Passe</label>
+                {{ form.mot_de_passe }}
+            </div>
+
+            <button type="submit" class="btn btn-dark btn-block">Ajouter</button>
+        </form>
+    </div>
+
+    <!-- Ajoutez le lien vers Bootstrap JS et Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
