@@ -4,31 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier le site</title>
+    <!-- Ajoutez le lien vers Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    <!-- templates/modifier_site.html -->
     <div class="container mt-5">
         <h2 class="text-center">Modifier le site</h2>
         <form method="post" action="">
             {% csrf_token %}
             {{ form.as_p }}
 
+            <!-- Utilisez les classes Bootstrap pour styliser le bouton -->
             <button type="submit" class="btn btn-primary btn-block">Modifier</button>
             <button type="button" id="generer_mot_de_passe" class="btn btn-secondary btn-block mt-3">Générer Mot de Passe Aléatoire</button>
         </form>
     </div>
 
+    <!-- Ajoutez le lien vers Bootstrap JS et Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
         document.getElementById('generer_mot_de_passe').addEventListener('click', function() {
+            // Appeler une fonction JavaScript pour générer un mot de passe aléatoire
             var motDePasseInput = document.getElementById('id_mot_de_passe');
             motDePasseInput.value = genererMotDePasse();
         });
 
         function genererMotDePasse() {
+            // Code JavaScript pour générer un mot de passe aléatoire
+            // Vous pouvez personnaliser cette fonction selon vos besoins
             var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
             var longueur = 12;
             var motDePasse = '';
