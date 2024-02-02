@@ -9,11 +9,9 @@ from .models import Site
 from django.shortcuts import render, redirect
 from .forms import SiteForm
 from credentialsmanager.script import ajout
-from .forms import LoginForm
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
-from .forms import LoginForm
 
 def detail_site(request, pk):
     site = get_object_or_404(Site, pk=pk)
