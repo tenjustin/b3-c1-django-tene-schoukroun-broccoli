@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'import_csv' %}" method="post" enctype="multipart/form-data" class="dropzone" id="csv-dropzone">
+    {% csrf_token %}
+    <div class="my-3">
+      <label for="formFileLg" class="form-label">Choisissez un fichier</label>
+      <input class="form-control form-control-lg" id="file" name="file" type="file">
+    </div>
+    <button type="submit" class="btn btn-primary">Importer depuis CSV</button>
+</form>
+
+{% endblock %}

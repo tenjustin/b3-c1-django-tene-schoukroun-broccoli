@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from credentialsmanager.models import Site
+from .models import Site
+from .models import CustomUser
+
+admin.site.register(Site)
+
+admin.site.register(CustomUser)

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a class="btn btn-primary" type="button" href="{% url 'ajout_site' %}">Ajouter un site</a>
+    <a class="btn btn-primary" type="button" href="{% url 'export_csv' %}">Exporter au format CSV</a>
+    <a class="btn btn-primary" type="button" href="{% url 'page_import' %}">Importer depuis un fichier CSV</a>
+    <form class="mt-3" method="get" action="{% url 'liste_sites' %}">
+        <div class="input-group">
+            <input type="text" class="form-control" name="q" placeholder="Rechercher par nom" value="{{ query|default:'' }}">
+            <button type="submit" class="btn btn-outline-secondary">Rechercher</button>
+            {% if query %}
+                <a href="{% url 'liste_sites' %}" class="btn btn-outline-secondary">Annuler</a>
+            {% endif %}
+        </div>
+    </form>
+  
+    {% if query %}
+        <p class="mt-2">Résultats de la recherche pour "{{ query }}":</p>
+    {% endif %}
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Edition</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if sites %}
+                {% for pass in sites %}
+                    <tr>
+                        <td><a href="{% url 'detail_site' pk=pass.id %}">{{ pass.nom }}</a></td>
+                        <td><a href="{% url 'modification_site' pk=pass.id %}" class="btn btn-warning btn-sm">Modifier</a></td>
+                        <td><a href="{% url 'supprimer_enregistrement' pk=pass.id %}" class="btn btn-danger btn-sm">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

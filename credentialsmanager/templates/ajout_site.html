@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un nouveau site</title>
+    <!-- Ajoutez le lien vers Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <form method="post" action="{% url 'ajout_site' %}" class="bg-white p-4 rounded shadow-sm">
+            {% csrf_token %}
+            <h2 class="text-center mb-4">Ajouter un nouveau site</h2>
+            
+            <!-- Utilisez les classes Bootstrap pour styliser le formulaire -->
+            <div class="form-group">
+                <label for="{{ form.nom.id_for_label }}">Nom</label>
+                {{ form.nom }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.url.id_for_label }}">URL</label>
+                {{ form.url }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.identifiant.id_for_label }}">Identifiant</label>
+                {{ form.identifiant }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.mot_de_passe.id_for_label }}">Mot de Passe</label>
+                {{ form.mot_de_passe }}
+            </div>
+
+            <button type="submit" class="btn btn-dark btn-block">Ajouter</button>
+        </form>
+    </div>
+
+    <!-- Ajoutez le lien vers Bootstrap JS et Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
